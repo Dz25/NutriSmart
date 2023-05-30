@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">NutriSmart</string>
+    <string name="title_home">Home</string>
+    <string name="title_add">Add</string>
+    <string name="title_profile">Profile</string>
+</resources>
