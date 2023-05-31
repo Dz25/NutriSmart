@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ui.splash.SplashActivity">
+
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/editTextAge"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAge" />
+
+    <EditText
+        android:id="@+id/editTextWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/editTextHeight"
+        app:layout_constraintTop_toBottomOf="@+id/editTextHeight" />
+
+    <Spinner
+        android:id="@+id/spinnerGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        app:layout_constraintStart_toStartOf="@+id/spinnerExpenditure"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWeight" />
+
+    <Spinner
+        android:id="@+id/spinnerExpenditure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="146dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGender" />
+
+    <CheckBox
+        android:id="@+id/checkBoxGluten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:text="Gluten Free"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBoxMilk"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxMilk"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBoxVegan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxEgg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxGluten" />
+
+    <CheckBox
+        android:id="@+id/checkBoxVegeterian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="12dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxFish"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxVegan" />
+
+    <CheckBox
+        android:id="@+id/checkBoxMilk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="11dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxShellfish"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxGluten"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxShellfish" />
+
+    <CheckBox
+        android:id="@+id/checkBoxEgg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="11dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxTreeNut"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxVegan"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxMilk" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="11dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxNut"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxVegeterian"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxEgg" />
+
+    <CheckBox
+        android:id="@+id/checkBoxShellfish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="26dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxMilk"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerExpenditure" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTreeNut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="26dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxEgg"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxShellfish" />
+
+    <CheckBox
+        android:id="@+id/checkBoxNut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="26dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxFish"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTreeNut" />
+
+    <CheckBox
+        android:id="@+id/checkBoxWheat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="12dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxSoy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxVegeterian" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="11dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxSesame"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxWheat"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxFish" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSesame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="26dp"
+        android:text="CheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxSoy"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxNut" />
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="33dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxSoy" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
+    <string-array name="spinnerGender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Others</item>
+    </string-array>
 </resources>
