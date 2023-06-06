@@ -3,9 +3,37 @@
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
+    <string name="age_label">Age</string>
+    <string name="height_label">Height in cm</string>
+    <string name="weight_label">Weight in kg</string>
+    <string name="spinnerGender_prompt">Select Gender</string>
+    <string name="spinnerExpenditure_label">Select amount of exercise</string>
+    <string name="gluten_free">Gluten Free</string>
+    <string name="vegan">Vegan</string>
+    <string name="vegeterian">Vegeterian</string>
+    <string name="milk">Milk</string>
+    <string name="egg">Egg</string>
+    <string name="fish">Fish</string>
+    <string name="shellfish">Shellfish</string>
+    <string name="tree_nut">Tree Nut</string>
+    <string name="nut">Nut</string>
+    <string name="wheat">Wheat</string>
+    <string name="soy">Soy</string>
+    <string name="sesame">Sesame</string>
+    <string name="buttonNext_lable">Next</string>
+    <string name="diets_and_allergy_tick_where_it_applied">Diets and allergy (Tick where it applied)</string>
+    <string name="gender_label">Gender</string>
+    <string name="activity_factor_label">Activity factor</string>
     <string-array name="spinnerGender">
         <item>Male</item>
         <item>Female</item>
         <item>Others</item>
+    </string-array>
+    <string-array name="spinnerExpenditure">
+        <item>Sedentary (little or no exercise)</item>
+        <item>Lightly active (1-3 days/week)</item>
+        <item>Moderately active (3-5 days/week)</item>
+        <item>Very active (6-7 days a week)</item>
+        <item>Extremely active (physical job)</item>
     </string-array>
 </resources>

@@ -12,20 +12,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.nutrismart.databinding.ActivityAddBinding;
 
+
 //TODO: Make this into an activity
 public class AddActivity extends AppCompatActivity {
 
     private ActivityAddBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        AddViewModel addViewModel =
-                new ViewModelProvider(this).get(AddViewModel.class);
-
-        binding = ActivityAddBinding.inflate(inflater, container, false);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityAddBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
-
-        return root;
+        setContentView(root);
     }
 
 
