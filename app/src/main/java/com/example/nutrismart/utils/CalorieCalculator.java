@@ -12,7 +12,6 @@ public class CalorieCalculator {
         put("Extremely", 1.9f);
     }};
 
-    //TODO: Implement macronutrient
     public static float calorieNeed(int age, int height, float weight, String gender, String expend) {
         float calories = (float) ((10 * weight) + (6.25 * height) - (5 * age));
         float mtpl = multilplier.get(expend);

@@ -28,14 +28,6 @@ public class SplashActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
         editor = sharedPref.edit();
         setContentView(root);
-        //TODO: put the check first time to onResume, handle back button
-        //checking if launching the app for the first time
-        if (sharedPref.getBoolean("firstTime",true)){
-            editor.putBoolean("firstTime",false).commit();
-        } else {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        }
 
         //onClickListener for next button
         binding.buttonNext.setOnClickListener(v -> {
@@ -82,6 +74,16 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //checking if launching the app for the first time
+        if (sharedPref.getBoolean("firstTime",true)){
+            editor.putBoolean("firstTime",false).commit();
+        } else {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
 
-
+    }
 }
