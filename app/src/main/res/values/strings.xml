@@ -4,8 +4,8 @@
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
     <string name="age_label">Age</string>
-    <string name="height_label">Height in cm</string>
-    <string name="weight_label">Weight in kg</string>
+    <string name="height_label">Height (in cm)</string>
+    <string name="weight_label">Weight (in kg)</string>
     <string name="spinnerGender_prompt">Select Gender</string>
     <string name="spinnerExpenditure_label">Select amount of exercise</string>
     <string name="gluten_free">Gluten Free</string>
@@ -24,6 +24,9 @@
     <string name="diets_and_allergy_tick_where_it_applied">Diets and allergy (Tick where it applied)</string>
     <string name="gender_label">Gender</string>
     <string name="activity_factor_label">Activity factor</string>
+    <string name="BMI_label">BMI</string>
+    <string name="intolerance_label">Intolerances</string>
+    <string name="diets_label">Diets</string>
     <string-array name="spinnerGender">
         <item>Male</item>
         <item>Female</item>

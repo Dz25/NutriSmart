@@ -3,7 +3,7 @@ package com.example.nutrismart.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CalorieCalculator {
+public class NutritionCalculator {
     private static final Map<String, Float> multilplier = new HashMap<String, Float>() {{
         put("Sedentary ", 1.2f);
         put("Lightly", 1.375f);
@@ -12,7 +12,7 @@ public class CalorieCalculator {
         put("Extremely", 1.9f);
     }};
 
-    public static float calorieNeed(int age, int height, float weight, String gender, String expend) {
+    public static float calculateCalorieNeed(int age, float height, float weight, String gender, String expend) {
         float calories = (float) ((10 * weight) + (6.25 * height) - (5 * age));
         float mtpl = multilplier.get(expend);
         if (gender.equals("male")) {
@@ -22,5 +22,9 @@ public class CalorieCalculator {
         }
         calories = Math.round(calories * mtpl);
         return calories;
+    }
+
+    public static float calculateBMI(float height, float weight){
+        return Math.round(weight/(height * height ));
     }
 }

@@ -26,8 +26,8 @@ public class ProfileFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        //profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

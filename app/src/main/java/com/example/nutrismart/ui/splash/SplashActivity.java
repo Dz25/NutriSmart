@@ -27,6 +27,13 @@ public class SplashActivity extends AppCompatActivity {
         View root = binding.getRoot();
         sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
         editor = sharedPref.edit();
+        //check when activity created to avoid showing
+        if (sharedPref.getBoolean("firstTime",true)){
+            editor.putBoolean("firstTime",false).commit();
+        } else {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
         setContentView(root);
 
         //onClickListener for next button
