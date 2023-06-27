@@ -2,13 +2,10 @@ package com.example.nutrismart;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 
 import com.example.nutrismart.ui.add.AddActivity;
 import com.example.nutrismart.ui.home.HomeFragment;
-import com.example.nutrismart.ui.profile.ProfileFragment;
-
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.example.nutrismart.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationBarView;
+import com.example.nutrismart.ui.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 

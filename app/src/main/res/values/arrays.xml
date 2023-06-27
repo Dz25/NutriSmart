@@ -1,0 +1,54 @@
+<resources>
+    <!-- Expenditure Preference -->
+    <string-array name="expenditure_entries">
+        <item>Sedentary (little or no exercise)</item>
+        <item>Lightly active (1-3 days/week)</item>
+        <item>Moderately active (3-5 days/week)</item>
+        <item>Very active (6-7 days a week)</item>
+        <item>Extremely active (physical job)</item>
+    </string-array>
+
+    <string-array name="expenditure_values">
+        <item>sedentary</item>
+        <item>lightly</item>
+        <item>moderately</item>
+        <item>very</item>
+        <item>extremely</item>
+    </string-array>
+    
+    <!-- Diets Preference   -->
+    <string-array name="diets_entries">
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+        <item>Gluten Free</item>
+    </string-array>
+
+    <string-array name="diets_values">
+        <item>vegan</item>
+        <item>vegetarian</item>
+        <item>glutenFree</item>
+    </string-array>
+
+    <!--Intolerances Pref  -->
+    <string-array name="intolerances_entries">
+        <item>Egg</item>
+        <item>Milk</item>
+        <item>Nut</item>
+        <item>Shellfish</item>
+        <item>Tree Nut</item>
+        <item>Soy</item>
+        <item>Wheat</item>
+        <item>Sesame</item>
+    </string-array>
+
+    <string-array name="intolerances_values">
+        <item>egg</item>
+        <item>milk</item>
+        <item>nut</item>
+        <item>shellfish</item>
+        <item>treeNut</item>
+        <item>soy</item>
+        <item>wheat</item>
+        <item>sesame</item>
+    </string-array>
+</resources>

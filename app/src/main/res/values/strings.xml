@@ -39,4 +39,9 @@
         <item>Very active (6-7 days a week)</item>
         <item>Extremely active (physical job)</item>
     </string-array>
+    <!-- Preference Titles -->
+    <string name="personal_header">Personal Information</string>
+    <string name="pref_header">Diets and Intolerances</string>
+
+
 </resources>

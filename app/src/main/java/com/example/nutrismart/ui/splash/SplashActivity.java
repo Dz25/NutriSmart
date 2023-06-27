@@ -25,20 +25,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
-        sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
+        sharedPref = getSharedPreferences("com.example.nutrismart_preferences", MODE_PRIVATE);
         editor = sharedPref.edit();
-        //check when activity created to avoid showing
-        if (sharedPref.getBoolean("firstTime",true)){
-            editor.putBoolean("firstTime",false).commit();
-        } else {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        }
         setContentView(root);
 
         //onClickListener for next button
         binding.buttonNext.setOnClickListener(v -> {
-            Toast.makeText(this, "Testing 1 2 3 4", Toast.LENGTH_SHORT).show();
             Set<String> intolerances = new HashSet<>();
             Set<String> diets = new HashSet<>();
 
@@ -56,19 +48,21 @@ public class SplashActivity extends AppCompatActivity {
             }
 
             editor.putString("gender", binding.spinnerGender.getSelectedItem().toString());
-            editor.putString("expenditure",binding.spinnerExpenditure.getSelectedItem().toString());
+
+            editor.putString("expenditure",binding.spinnerExpenditure.getSelectedItem().toString().toLowerCase().split(" ")[0]);
 
             if (binding.checkBoxEgg.isChecked()) intolerances.add("egg");
             if (binding.checkBoxFish.isChecked()) intolerances.add("fish");
             if (binding.checkBoxMilk.isChecked()) intolerances.add("milk");
             if (binding.checkBoxNut.isChecked()) intolerances.add("nut");
             if (binding.checkBoxShellfish.isChecked()) intolerances.add("shellfish");
-            if (binding.checkBoxTreeNut.isChecked()) intolerances.add("tree nut");
+            if (binding.checkBoxTreeNut.isChecked()) intolerances.add("treeNut");
             if (binding.checkBoxSoy.isChecked()) intolerances.add("soy");
             if (binding.checkBoxWheat.isChecked()) intolerances.add("wheat");
+            if (binding.checkBoxSesame.isChecked()) intolerances.add("sesame");
             editor.putStringSet("intolerances",intolerances);
 
-            if (binding.checkBoxGluten.isChecked()) diets.add("gluten free");
+            if (binding.checkBoxGluten.isChecked()) diets.add("glutenFree");
             if (binding.checkBoxVegan.isChecked()) diets.add("vegan");
             if (binding.checkBoxVegeterian.isChecked()) diets.add("vegetarian");
             editor.putStringSet("diets",diets);
@@ -86,7 +80,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onResume();
         //checking if launching the app for the first time
         if (sharedPref.getBoolean("firstTime",true)){
-            editor.putBoolean("firstTime",false).commit();
+            editor.putBoolean("firstTime",false);
         } else {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

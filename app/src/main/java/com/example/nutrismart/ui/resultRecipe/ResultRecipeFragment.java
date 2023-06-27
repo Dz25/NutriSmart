@@ -1,4 +1,4 @@
-package com.example.nutrismart.ui.ResultRecipe;
+package com.example.nutrismart.ui.resultRecipe;
 
 import androidx.lifecycle.ViewModelProvider;
 

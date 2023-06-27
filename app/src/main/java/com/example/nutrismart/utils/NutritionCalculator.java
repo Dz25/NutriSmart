@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class NutritionCalculator {
     private static final Map<String, Float> multilplier = new HashMap<String, Float>() {{
-        put("Sedentary ", 1.2f);
-        put("Lightly", 1.375f);
-        put("Moderately", 1.55f);
-        put("Very", 1.725f);
-        put("Extremely", 1.9f);
+        put("sedentary ", 1.2f);
+        put("lightly", 1.375f);
+        put("moderately", 1.55f);
+        put("very", 1.725f);
+        put("extremely", 1.9f);
     }};
 
     public static float calculateCalorieNeed(int age, float height, float weight, String gender, String expend) {
