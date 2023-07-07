@@ -12,7 +12,7 @@ public class NutritionCalculator {
         put("extremely", 1.9f);
     }};
 
-    public static float calculateCalorieNeed(int age, float height, float weight, String gender, String expend) {
+    public static int calculateCalorieNeed(int age, float height, float weight, String gender, String expend) {
         float calories = (float) ((10 * weight) + (6.25 * height) - (5 * age));
         float mtpl = multilplier.get(expend);
         if (gender.equals("male")) {
@@ -21,7 +21,7 @@ public class NutritionCalculator {
             calories -= 161;
         }
         calories = Math.round(calories * mtpl);
-        return calories;
+        return (int) calories;
     }
 
     public static float calculateBMI(float height, float weight){

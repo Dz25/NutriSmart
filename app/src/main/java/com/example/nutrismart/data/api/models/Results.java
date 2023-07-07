@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Results {
     @SerializedName("searchResults")
-    List<SearchResult> searchResults;
+    public List<SearchResult> searchResults;
     public class SearchResult{
         @SerializedName("name")
-        String name;
+        public String name;
         @SerializedName("results")
-        List<Result> results;
+        public List<Result> results;
     }
 }

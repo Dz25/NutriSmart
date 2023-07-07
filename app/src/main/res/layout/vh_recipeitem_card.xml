@@ -13,7 +13,7 @@
         android:id="@+id/recipes_card_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="@color/material_dynamic_primary80"
         android:clickable="true"
         android:focusable="true">
 
@@ -28,15 +28,16 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/white" />
 
 
-            <ImageView
-                android:id="@+id/imageViewRecipe"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_alignParentTop="true"
-                android:src="@color/white" />
+        <ImageView
+            android:id="@+id/imageViewRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_alignParentTop="true"
+            android:src="@color/white" />
 
 
     </RelativeLayout>

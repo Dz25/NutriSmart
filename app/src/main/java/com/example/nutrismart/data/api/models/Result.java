@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class Result {
     @SerializedName("id")
-    long id;
+    public long id;
     @SerializedName("name")
-    String name;
+    public String name;
     @SerializedName("image")
-    String image;
+    public String image;
     @SerializedName("link")
-    String link;
+    public String link;
 }

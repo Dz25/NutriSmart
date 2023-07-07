@@ -20,7 +20,7 @@ public interface SpoonacularInterface {
     //Search for food
     @GET("/food/search")
     @Headers("Content-Type: application/json")
-    Call<Results> getAllFood(@Query("apiKey") String apiKey, @Query("query") String query, @Query("number") int number);
+    Call<Results> searchAllFood(@Query("apiKey") String apiKey, @Query("query") String query, @Query("number") int number);
 
     //Get Recipe Card
     @GET("/recipes/{id}/card")

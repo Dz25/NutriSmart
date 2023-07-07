@@ -1,19 +1,38 @@
 package com.example.nutrismart.data.api;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SpoonacularClient {
 
-    private static Retrofit retrofit = null;
+    private static SpoonacularClient instance = null;
+    private SpoonacularInterface spoonacularInterface;
 
-    static Retrofit getInstance() {
-        retrofit = new Retrofit.Builder()
+    private SpoonacularClient() {
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.spoonacular.com")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
-
-        return retrofit;
+         spoonacularInterface = retrofit.create(SpoonacularInterface.class);
     }
+
+    public static synchronized SpoonacularClient getInstance(){
+        if (instance == null) {
+            instance = new SpoonacularClient();
+        }
+        return instance;
+    }
+
+    public SpoonacularInterface getAPI(){
+        return spoonacularInterface;
+    }
+
 }

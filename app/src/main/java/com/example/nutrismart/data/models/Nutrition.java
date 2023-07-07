@@ -3,16 +3,18 @@ package com.example.nutrismart.data.models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "nutrition")
 public class Nutrition {
     @PrimaryKey(autoGenerate = true)
-    int id;
+    public int id;
 
-    float calories;
+    public String date;
 
-    float protein;
+    public float calories;
 
-    float carb;
+    public float protein;
 
-    float fat;
+    public float carb;
+
+    public float fat;
 }
