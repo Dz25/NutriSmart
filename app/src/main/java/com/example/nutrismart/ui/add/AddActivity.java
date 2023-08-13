@@ -63,7 +63,8 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //make API call here
-                if (newText.length() > 3){
+                //Limit the API call frequency
+                if (newText.length() > 2){
                     fetchRes(newText);
                     return true;
                 }
@@ -72,6 +73,7 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
+    //move to viewModel and repo
     public void fetchRes(String newText){
         Call<Results> call = spoonacularInterface.searchAllFood(key,newText,7);
         call.enqueue(new Callback<Results>() {
@@ -91,12 +93,15 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void processRes(Results results) {
+        searchResultList.clear();
+        //TODO: move this to view model
         for (int i = 0; i < results.searchResults.size(); i++){
             String name = results.searchResults.get(i).name;
-            Log.d("NCall", name);
+            //Only takes results for recipes, products, menu items
             if (name.equalsIgnoreCase("Recipes") || name.equalsIgnoreCase("Products") || name.equalsIgnoreCase("Menu Items")){
                 for (int j = 0; j < results.searchResults.get(i).results.size(); j++){
                     Result result = results.searchResults.get(i).results.get(j);
+                    result.itemType = results.searchResults.get(i).name;
                     Log.d("INFO", result.name);
                     searchResultList.add(result);
                 }

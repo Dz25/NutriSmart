@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //set background for bottom navigation
         binding.navView.setBackground(null);
         binding.navView.getMenu().getItem(1).setEnabled(false);
-        //Navigation meunu
+        //Navigation menu
         binding.navView.setOnItemSelectedListener(item -> {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();

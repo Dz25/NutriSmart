@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName;
 
 public class RecipeCard {
     @SerializedName("url")
-    String url;
+    public String url;
 }

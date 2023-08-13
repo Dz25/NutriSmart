@@ -11,4 +11,5 @@ public class Result {
     public String image;
     @SerializedName("link")
     public String link;
+    public String itemType;
 }

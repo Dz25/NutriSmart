@@ -11,14 +11,14 @@ public class SpoonacularClient {
     private SpoonacularInterface spoonacularInterface;
 
     private SpoonacularClient() {
-
+        //TODO: make it into multi converter
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
          Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.spoonacular.com")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(new JsonOrPojoConverterFactory())
                 .client(client)
                 .build();
          spoonacularInterface = retrofit.create(SpoonacularInterface.class);

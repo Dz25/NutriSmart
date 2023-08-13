@@ -6,15 +6,15 @@ import java.util.List;
 
 public class Meals {
     @SerializedName("meals")
-    List<Meal> meals = null;
+    public List<Meal> meals = null;
     public class Meal {
         @SerializedName("id")
-        long id;
+        public long id;
         @SerializedName("title")
-        String title;
+        public String title;
         @SerializedName("readyInMinutes")
-        int readyInMinutes;
+        public int readyInMinutes;
         @SerializedName("sourceUrl")
-        String sourceUrl;
+        public String sourceUrl;
     }
 }

@@ -3,43 +3,44 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:cardCornerRadius="9dp"
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipes_card_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/material_dynamic_primary80"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:padding="10dp">
 
 
         <TextView
             android:id="@+id/textViewRecipeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageViewRecipe"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/white" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewRecipe"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewRecipe" />
 
 
         <ImageView
             android:id="@+id/imageViewRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_alignParentTop="true"
-            android:src="@color/white" />
+            android:layout_width="312dp"
+            android:layout_height="231dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_profile"
+            />
 
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
