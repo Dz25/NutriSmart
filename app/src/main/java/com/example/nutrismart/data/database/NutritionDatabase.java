@@ -1,6 +1,7 @@
 package com.example.nutrismart.data.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -30,6 +31,7 @@ public abstract class NutritionDatabase extends RoomDatabase {
                 }
             }
         }
+        Log.d("DB", "Database opened");
         return INSTANCE;
     }
 }

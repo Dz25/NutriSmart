@@ -15,9 +15,9 @@ import java.util.List;
 public interface NutritionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertNutrition(Nutrition nutrition);
-    @Query("SELECT * FROM nutrition WHERE date =:date")
+    @Query("SELECT * FROM nutrition WHERE date LIKE :date")
     public LiveData<List<Nutrition>> getNutritionByDate(String date);
-    @Query("SELECT * FROM nutrition WHERE id=:id")
+    @Query("SELECT * FROM nutrition WHERE id LIKE :id")
     public LiveData<Nutrition> getNutritionById(long id);
     @Delete
     public int deleteNutrition(Nutrition nutrition);

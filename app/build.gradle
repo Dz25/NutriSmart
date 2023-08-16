@@ -38,6 +38,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation "androidx.lifecycle:lifecycle-service:2.6.1"
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -54,15 +55,13 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
     //Room
     def room_version = "2.5.2"
-
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
     //Picasso img loader
     implementation 'com.squareup.picasso:picasso:2.8'
-
     //JSOUP
     implementation 'org.jsoup:jsoup:1.11.1'
+
 }
 configurations.implementation {
     exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 
 import com.example.nutrismart.data.api.SpoonacularClient;
 import com.example.nutrismart.data.api.SpoonacularInterface;
@@ -50,13 +51,7 @@ public class NutritionRepo {
 
     //TODO: Delete temp data for testing purpose
     public LiveData<List<Nutrition>> getNutritionByDate(String date){
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                nutritions = nutritionDao.getNutritionByDate(date);
-            }
-        });
-        return nutritions;
+        return  nutritionDao.getNutritionByDate(date);
     }
 
     //return the number of deleted entity

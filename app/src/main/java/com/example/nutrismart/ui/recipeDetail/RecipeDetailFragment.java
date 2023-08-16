@@ -46,7 +46,6 @@ public class RecipeDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(RecipeDetailViewModel.class);
-        //mViewModel.getRecipeUrl();
         // TODO: Use the ViewModel
         //get URL
         String url = mViewModel.getRecipeUrl(ID);

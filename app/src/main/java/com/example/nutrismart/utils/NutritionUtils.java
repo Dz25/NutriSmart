@@ -10,14 +10,8 @@ import java.util.Map;
 
 public class NutritionUtils {
 
-    public static int calculateCalorieNeed(int age, float height, float weight, String gender, String expend) {
-//        Map<String,Float> multilplier = new HashMap<String, Float>() {{
-//            put("sedentary ", 1.2f);
-//            put("lightly", 1.375f);
-//            put("c", 1.55f);
-//            put("very", 1.725f);
-//            put("extremely", 1.9f);
-//        }};
+    public static float calculateCalorieNeed(int age, float height, float weight, String gender, String expend) {
+
         float calories = (float) ((10 * weight) + (6.25 * height) - (5 * age));
         float mtpl;
         switch (expend){
@@ -34,8 +28,30 @@ public class NutritionUtils {
             calories -= 161;
         }
         calories = Math.round(calories * mtpl);
-        return (int) calories;
+        return  calories;
     }
+
+    public static Map<String, Float> calculateMacronutrients(float totalCalories) {
+        Map<String, Float> macronutrients = new HashMap<>();
+
+        // Calculate macronutrient distribution percentages
+        float carbPercentage = 0.50f;
+        float proteinPercentage = 0.25f;
+        float fatPercentage = 0.25f;
+
+        // Calculate grams of each macronutrient
+        float carbGrams = (carbPercentage * totalCalories) / 4;
+        float proteinGrams = (proteinPercentage * totalCalories) / 4;
+        float fatGrams = (fatPercentage * totalCalories) / 9;
+
+        // Populate the map
+        macronutrients.put("carbs", carbGrams);
+        macronutrients.put("proteins", proteinGrams);
+        macronutrients.put("fats", fatGrams);
+
+        return macronutrients;
+    }
+
 
     public static float calculateBMI(float height, float weight){
         return Math.round(weight/(height * height ));

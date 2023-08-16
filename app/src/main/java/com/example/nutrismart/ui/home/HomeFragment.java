@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,10 +31,15 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,13 +53,27 @@ public class HomeFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     private List<Meals.Meal> mealResList = new ArrayList<>();
-    private int calorieNeed;
+    private float goalCalorie;
     private String diet;
     private String exclude;
-    private List<Nutrition> nutritionList;
+    private List<Nutrition> nutritionList = new ArrayList<>();
+    private Map<String, Float> macronutrients = new HashMap<>();
+    private Map<String, Float> nutritionMap = new HashMap<>();
     private HomeViewModel homeViewModel;
+    private ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
-    private ArrayList<PieEntry> pieEntries;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getNutritionList().observe(getViewLifecycleOwner(), _nutritionList -> {
+            nutritionList = _nutritionList;
+            initChart();
+            calculatePieChart();
+            showProgressBar();
+            showChart();
+        });
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,16 +81,11 @@ public class HomeFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         View root = binding.getRoot();
 
-        //create viewModel
-        homeViewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(HomeViewModel.class);
-//        homeViewModel.getNutritionList().observe(getViewLifecycleOwner(), _nutritionList -> {
-//            nutritionList = new ArrayList<>(_nutritionList);
-//            calculatePieChart();
-//        });
-
         //populate rec meals
         spoonacularInterface = SpoonacularClient.getInstance().getAPI();
         SharedPreferences sharedPref = this.getActivity().getSharedPreferences("com.example.nutrismart_preferences", MODE_PRIVATE);
+
+        //get Pref
         int age = Integer.parseInt(sharedPref.getString("age","20"));
         float height = Float.parseFloat(sharedPref.getString("height", "150"));
         float weight = Float.parseFloat(sharedPref.getString("weight", "50"));
@@ -78,12 +93,24 @@ public class HomeFragment extends Fragment {
         String expend = sharedPref.getString("expenditure", "very");
         diet = String.join(",",sharedPref.getStringSet("diets",new HashSet<>(Arrays.asList("vegan"))));
         exclude = String.join(",",sharedPref.getStringSet("intolerances",new HashSet<>()));
-        calorieNeed = NutritionUtils.calculateCalorieNeed(age,height,weight,gender,expend);
+        goalCalorie = NutritionUtils.calculateCalorieNeed(age,height,weight,gender,expend);
+        macronutrients = NutritionUtils.calculateMacronutrients(goalCalorie);
+        Log.d("info", macronutrients.get("carbs").toString());
+        Log.d("info", macronutrients.get("proteins").toString());
+        Log.d("info", macronutrients.get("fats").toString());
+        //set Max
+        binding.carbsBar.setMax(Math.round(macronutrients.get("carbs")));
+        binding.proteinsBar.setMax(Math.round(macronutrients.get("proteins")));
+        binding.fatsBar.setMax(Math.round(macronutrients.get("fats")));
 
-        //Chart
-        initChart();
-        //TODO: Get data from viewModel
-        showChart();
+//        //Pie Chart
+//        initChart();
+//        //TODO: Get data from viewModel
+//        calculatePieChart();
+//        showChart();
+//
+//        //Progress bar
+//        showProgressBar();
 
         //Generate meal plan daily recycler view
         layoutManager = new LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false);
@@ -94,15 +121,57 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    private void showProgressBar() {
+
+        //setProgress
+        float carbsLeft = Math.round(macronutrients.get("carbs") - nutritionMap.get("carb"));
+        float proteinsLeft = Math.round(macronutrients.get("proteins") - nutritionMap.get("protein")) ;
+        float fatsLeft = Math.round(macronutrients.get("fats") - nutritionMap.get("fat"));
+
+        if (carbsLeft >= 0){
+            binding.carbsBar.setProgress(Math.round(nutritionMap.get("carb")));
+            binding.carbsLeft.setText(carbsLeft + "g left");
+        }else{
+            binding.carbsBar.setProgress(binding.carbsBar.getMax());
+            binding.carbsLeft.setText(Math.abs(carbsLeft) + "g over");
+        }
+        if (proteinsLeft >= 0){
+            binding.proteinsBar.setProgress(Math.round(nutritionMap.get("protein")));
+            binding.proteinsLeft.setText(proteinsLeft + "g left");
+        }else{
+            binding.proteinsBar.setProgress(binding.proteinsBar.getMax());
+            binding.proteinsLeft.setText(Math.abs(proteinsLeft) + "g over");
+        }
+        if (fatsLeft >= 0){
+            binding.fatsBar.setProgress(Math.round(nutritionMap.get("fat")));
+            binding.fatsLeft.setText(fatsLeft + "g left");
+        }else{
+            binding.fatsBar.setProgress(binding.fatsBar.getMax());
+            binding.fatsLeft.setText(Math.abs(fatsLeft) + "g over");
+        }
+    }
+
     private void calculatePieChart() {
         //process pieEntries then put it here
-        binding.chart.notifyDataSetChanged();
+
+        nutritionMap.put("calories", 0f);
+        nutritionMap.put("protein",0f);
+        nutritionMap.put("carb", 0f);
+        nutritionMap.put("fat",0f);
+
+       for (int i = 0; i < nutritionList.size(); i++){
+           nutritionMap.put("calories",nutritionMap.get("calories") + nutritionList.get(i).calories);
+           nutritionMap.put("protein",nutritionMap.get("protein") + nutritionList.get(i).protein);
+           nutritionMap.put("carb",nutritionMap.get("carb") + nutritionList.get(i).carb);
+           nutritionMap.put("fat",nutritionMap.get("fat") + nutritionList.get(i).fat);
+       }
+
     }
 
     //TODO: move this to ViewModel
     private void fetchMeals() {
         //TODO: move this to Nutrition Repo
-        Call<Meals> call = spoonacularInterface.getMealPlan(key,"day",calorieNeed,diet,exclude);
+        Call<Meals> call = spoonacularInterface.getMealPlan(key,"day",goalCalorie,diet,exclude);
         call.enqueue(new Callback<Meals>() {
             @Override
             public void onResponse(Call<Meals> call, Response<Meals> response) {
@@ -131,9 +200,6 @@ public class HomeFragment extends Fragment {
 
     //Pie chart init
     private void initChart() {
-        //using percentage as values instead of amount
-        binding.chart.setUsePercentValues(true);
-
         //remove the description label on the lower left corner, default true if not set
         binding.chart.getDescription().setEnabled(false);
 
@@ -149,21 +215,30 @@ public class HomeFragment extends Fragment {
         //adding animation so the entries pop up from 0 degree
         binding.chart.animateY(1500, Easing.EaseInOutQuad);
 
+        binding.chart.setCenterTextSize(32);
+
     }
 
     private void showChart(){
 
-        pieEntries = new ArrayList<>();
-
         //initializing data
-
-
         //input data and fit data into pie chart entry
+        float needCalorie = goalCalorie - nutritionMap.get("calories");
+        if (needCalorie > 0){
+            pieEntries.add(new PieEntry(needCalorie,"needed"));
+            pieEntries.add(new PieEntry(nutritionMap.get("calories"),"now"));
+            binding.chart.setCenterText(needCalorie + " kcal left!");
+        }else{
+            pieEntries.add(new PieEntry(goalCalorie,"now"));
+            binding.chart.setCenterText(needCalorie + " kcal over!");
+        }
+
 
         //set color
         ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#A9A9A9"));
         colors.add(Color.parseColor("#1AA7EC"));
-        colors.add(Color.parseColor("#FFFFFF"));
+
 
         //collecting the entries with label name
         PieDataSet pieDataSet = new PieDataSet(pieEntries,null);
@@ -174,13 +249,13 @@ public class HomeFragment extends Fragment {
         //grouping the data set from entry to chart
         PieData pieData = new PieData(pieDataSet);
         //showing the value of the entries, default true if not set
-        pieData.setDrawValues(true);
+        pieData.setDrawValues(false);
         //set word wrap
         binding.chart.getLegend().setWordWrapEnabled(true);
 
+        binding.chart.getLegend().setEnabled(false);
         binding.chart.setNoDataText("No data exists!");
-
-        //binding.chart.setData(pieData);
+        binding.chart.setData(pieData);
         binding.chart.setDrawEntryLabels(false);
         binding.chart.notifyDataSetChanged();
         binding.chart.invalidate();
